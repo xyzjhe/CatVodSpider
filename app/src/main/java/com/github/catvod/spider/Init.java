@@ -67,9 +67,6 @@ public class Init {
         // 启动Hook监控
         DanmakuScanner.startHookMonitor();
         DanmakuSpider.log("Leo弹幕监控已启动");
-
-        // 启动go代理监控检查
-        get().startHealthCheck(context);
     }
 
     private static void initGoProxy(Context context) {
@@ -135,6 +132,9 @@ public class Init {
                                 Toast.makeText(context, "加载：" + goProxy + "成功", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                        // 启动go代理监控检查
+                        get().startHealthCheck(context);
                     }
 
                     try (InputStream is = exec.getInputStream()) {
