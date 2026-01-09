@@ -38,7 +38,7 @@ public class GoProxySpider extends Spider {
      *
      * @param context
      */
-    private static void startHealthCheck(Context context) {
+    public static void startHealthCheck(Context context) {
         isFirstHealthCheck = true; // 重置首次检查标记
 
         if (healthCheckTimer != null) {
@@ -73,16 +73,9 @@ public class GoProxySpider extends Spider {
                     try {
                         initGoProxy(context);
                         SpiderDebug.log("Health check failed, restarting goProxy");
-                        Thread.sleep(3000);
                     } catch (Exception restartEx) {
                         SpiderDebug.log("Failed to restart goProxy: " + restartEx.getMessage());
                     }
-                }
-
-                try {
-                    Thread.sleep(HEALTH_INTERVAL);
-                } catch (InterruptedException ie) {
-                    SpiderDebug.log("Health check thread interrupted");
                 }
             }
         }, 0, 1000);
@@ -132,9 +125,6 @@ public class GoProxySpider extends Spider {
                     dos.flush();
                     dos.writeBytes("exit\n");
                     dos.flush();
-
-                    // 启动心跳检查
-                    startHealthCheck(context);
                 }
 
                 try (InputStream is = exec.getInputStream()) {
