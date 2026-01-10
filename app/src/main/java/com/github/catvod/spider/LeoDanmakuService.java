@@ -409,12 +409,12 @@ public class LeoDanmakuService {
     // 直接推送弹幕URL
     public static void pushDanmakuDirect(DanmakuItem danmakuItem, Activity activity, boolean isAuto) {
         // 防重复推送检查
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastPushTime < PUSH_MIN_INTERVAL) {
-            DanmakuSpider.log("⚠️ 推送过于频繁，跳过本次推送: " + danmakuItem.getDanmakuUrl());
-            return;
-        }
-        lastPushTime = currentTime;
+//        long currentTime = System.currentTimeMillis();
+//        if (currentTime - lastPushTime < PUSH_MIN_INTERVAL) {
+//            DanmakuSpider.log("⚠️ 推送过于频繁，跳过本次推送: " + danmakuItem.getDanmakuUrl());
+//            return;
+//        }
+//        lastPushTime = currentTime;
         // 记录弹幕URL（这个可以在主线程执行）
         DanmakuSpider.recordDanmakuUrl(danmakuItem, isAuto);
 

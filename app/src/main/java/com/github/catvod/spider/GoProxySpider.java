@@ -24,7 +24,7 @@ public class GoProxySpider extends Spider {
     private static volatile boolean isFirstHealthCheck; // 新增：用于标记是否是首次健康检查
 
     private static String goProxy = "";
-    private static final long HEALTH_INTERVAL = 1000; // 1秒间隔
+    private static final long HEALTH_INTERVAL = 500; // 0.5秒间隔
 
     @Override
     public void init(Context context, String extend) throws Exception {
@@ -78,7 +78,7 @@ public class GoProxySpider extends Spider {
                     }
                 }
             }
-        }, 0, 1000);
+        }, 0, HEALTH_INTERVAL);
 
         SpiderDebug.log("Health check thread started");
     }
